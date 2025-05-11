@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 
 export default function Navbar() {
   return (
-    <header className="sticky inset-x-0 top-0 z-50 w-full backdrop-blur-sm">
+    <header className="sticky inset-x-0 top-0 z-50 w-full backdrop-blur-xs">
       <nav className="mx-auto w-[85%]">
         <div className="flex h-14 items-center justify-between">
           <div className="flex w-1/3 items-center justify-start">
