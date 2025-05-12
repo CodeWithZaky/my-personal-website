@@ -2,10 +2,16 @@ import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import clsx from "clsx";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Architects_Daughter } from "next/font/google";
 import "../styles/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Architects_Daughter(
+  {
+    subsets: ["latin"],
+    display: "swap",
+    weight: ["400"],
+  }
+);
 
 export const metadata: Metadata = {
   title: "Home Page",
@@ -23,14 +29,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={clsx(inter.className, "scroll-smooth")}>
+      <body className={clsx(font.className, "scroll-smooth")}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <main className="w-full bg-primary/10">
+          <main className="bg-primary/10 w-full">
             <Navbar />
             {children}
             {/* <Footer /> */}
