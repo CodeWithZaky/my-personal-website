@@ -5,13 +5,11 @@ import type { Metadata } from "next";
 import { Architects_Daughter } from "next/font/google";
 import "../styles/globals.css";
 
-const font = Architects_Daughter(
-  {
-    subsets: ["latin"],
-    display: "swap",
-    weight: ["400"],
-  }
-);
+const font = Architects_Daughter({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400"],
+});
 
 export const metadata: Metadata = {
   title: "Home Page",
