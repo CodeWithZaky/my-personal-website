@@ -1,11 +1,11 @@
-import BarokahElectric from "@/assets/barokah-electric.png";
-import Catatanku from "@/assets/catatanku.png";
-import Gedongarum from "@/assets/gedongarum.png";
-import MatrixCalculator from "@/assets/matrix-calculator.png";
-import MyPortfolioV1 from "@/assets/my-portfolio-v1.png";
-import NumberConverter from "@/assets/number-converter.png";
-import MyPortfolioV2 from "@/assets/portfolio-v2.jpg";
 import { Github, Globe } from "lucide-react";
+import BarokahElectric from "../../public/assets/barokah-electric.png";
+import Catatanku from "../../public/assets/catatanku.png";
+import Gedongarum from "../../public/assets/gedongarum.png";
+import MatrixCalculator from "../../public/assets/matrix-calculator.png";
+import MyPortfolioV1 from "../../public/assets/my-portfolio-v1.png";
+import NumberConverter from "../../public/assets/number-converter.png";
+import MyPortfolioV2 from "../../public/assets/portfolio-v2.jpg";
 
 export const projects = [
   {
