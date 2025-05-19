@@ -3,113 +3,221 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    letter-spacing: var(--tracking-normal);
+    @apply bg-background text-foreground;
+  }
+}
+
+.border-test {
+  @apply border-muted-foreground dark:border-muted-foreground border;
+}
+
+.normal-sentences {
+  @apply text-foreground dark:text-foreground text-sm md:text-base lg:text-lg;
+}
+
+.medium-sentences {
+  @apply text-foreground dark:text-foreground text-lg sm:text-xl md:text-3xl;
+}
+
+.large-sentences {
+  @apply text-foreground dark:text-foreground text-xl md:text-3xl lg:text-5xl;
+}
+
+.border-image {
+  @apply shadow-primary shadow-[13px_-13px];
+}
+
+/*
+  ---break---
+*/
 :root {
-  --background: hsl(0 0% 98.82%);
-  --foreground: hsl(0 0% 5.88%);
+  --background: hsl(32.73 22.45% 90.39%);
+  --foreground: hsl(0 0% 0%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(0 0% 5.88%);
+  --card-foreground: hsl(0 0% 0%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(0 0% 5.88%);
+  --popover-foreground: hsl(0 0% 0%);
   --primary: hsl(355.14 100% 63.73%);
-  --primary-foreground: hsl(38.18 22.45% 90.39%);
-  --secondary: hsl(0 0% 89.8%);
-  --secondary-foreground: hsl(0 0% 5.88%);
-  --muted: hsl(0 0% 63.92%);
-  --muted-foreground: hsl(0 0% 45.1%);
-  --accent: hsl(354 100% 70.59%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(0 0% 94.12%);
+  --secondary-foreground: hsl(0 0% 0%);
+  --muted: hsl(0 0% 94.12%);
+  --muted-foreground: hsl(0 0% 50.2%);
+  --accent: hsl(355.14 100% 63.73%);
   --accent-foreground: hsl(0 0% 100%);
-  --destructive: hsl(0 100% 65.1%);
+  --destructive: hsl(355.14 100% 63.73%);
   --destructive-foreground: hsl(0 0% 100%);
   --border: hsl(0 0% 83.14%);
-  --input: hsl(0 0% 89.8%);
+  --input: hsl(0 0% 94.12%);
   --ring: hsl(355.14 100% 63.73%);
   --chart-1: hsl(355.14 100% 63.73%);
-  --chart-2: hsl(354 100% 70.59%);
-  --chart-3: hsl(354.12 100% 80%);
-  --chart-4: hsl(353.11 100% 88.04%);
-  --chart-5: hsl(5.45 100% 95.69%);
-  --sidebar: hsl(0 0% 98.82%);
-  --sidebar-foreground: hsl(0 0% 5.88%);
+  --chart-2: hsl(141.89 69.16% 58.04%);
+  --chart-3: hsl(238.73 83.53% 66.67%);
+  --chart-4: hsl(47.95 95.82% 53.14%);
+  --chart-5: hsl(255.14 91.74% 76.27%);
+  --sidebar: hsl(32.73 22.45% 90.39%);
+  --sidebar-foreground: hsl(0 0% 0%);
   --sidebar-primary: hsl(355.14 100% 63.73%);
-  --sidebar-primary-foreground: hsl(38.18 22.45% 90.39%);
-  --sidebar-accent: hsl(354 100% 70.59%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(355.14 100% 63.73%);
   --sidebar-accent-foreground: hsl(0 0% 100%);
   --sidebar-border: hsl(0 0% 83.14%);
   --sidebar-ring: hsl(355.14 100% 63.73%);
-  --font-sans: Outfit, sans-serif;
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-  --radius: 0.2rem;
-  --shadow-2xs: 0px 0px 30px 0px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0px 0px 30px 0px hsl(0 0% 0% / 0.05);
+  --font-sans: Poppins, sans-serif;
+  --font-serif: serif;
+  --font-mono: monospace;
+  --radius: 0.3rem;
+  --shadow-2xs: 0px 0px 10px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0px 0px 10px 0px hsl(0 0% 0% / 0.05);
   --shadow-sm:
-    0px 0px 30px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px -1px hsl(0 0% 0% / 0.1);
+    0px 0px 10px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px -1px hsl(0 0% 0% / 0.1);
   --shadow:
-    0px 0px 30px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px -1px hsl(0 0% 0% / 0.1);
+    0px 0px 10px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px -1px hsl(0 0% 0% / 0.1);
   --shadow-md:
-    0px 0px 30px 0px hsl(0 0% 0% / 0.1), 0px 2px 4px -1px hsl(0 0% 0% / 0.1);
+    0px 0px 10px 0px hsl(0 0% 0% / 0.1), 0px 2px 4px -1px hsl(0 0% 0% / 0.1);
   --shadow-lg:
-    0px 0px 30px 0px hsl(0 0% 0% / 0.1), 0px 4px 6px -1px hsl(0 0% 0% / 0.1);
+    0px 0px 10px 0px hsl(0 0% 0% / 0.1), 0px 4px 6px -1px hsl(0 0% 0% / 0.1);
   --shadow-xl:
-    0px 0px 30px 0px hsl(0 0% 0% / 0.1), 0px 8px 10px -1px hsl(0 0% 0% / 0.1);
-  --shadow-2xl: 0px 0px 30px 0px hsl(0 0% 0% / 0.25);
+    0px 0px 10px 0px hsl(0 0% 0% / 0.1), 0px 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0px 0px 10px 0px hsl(0 0% 0% / 0.25);
   --tracking-normal: 0.025em;
 }
 
 .dark {
-  --background: hsl(0 0% 5.88%);
-  --foreground: hsl(0 0% 89.8%);
-  --card: hsl(0 0% 9.02%);
+  --background: hsl(210 40% 9.8%);
+  --foreground: hsl(0 0% 100%);
+  --card: hsl(210 30.3% 12.94%);
   --card-foreground: hsl(0 0% 100%);
-  --popover: hsl(0 0% 9.02%);
-  --popover-foreground: hsl(0 0% 89.8%);
-  --primary: hsl(354.49 100% 63.73%);
-  --primary-foreground: hsl(33.33 19.15% 90.78%);
-  --secondary: hsl(0 0% 14.9%);
-  --secondary-foreground: hsl(0 0% 89.8%);
-  --muted: hsl(0 0% 32.16%);
-  --muted-foreground: hsl(0 0% 60%);
-  --accent: hsl(354 100% 70.59%);
+  --popover: hsl(210 30.3% 12.94%);
+  --popover-foreground: hsl(0 0% 100%);
+  --primary: hsl(355.14 100% 63.73%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(210 25.49% 20%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(210 25.49% 20%);
+  --muted-foreground: hsl(0 0% 50.2%);
+  --accent: hsl(355.14 100% 63.73%);
   --accent-foreground: hsl(0 0% 100%);
-  --destructive: hsl(0 100% 65.1%);
+  --destructive: hsl(355.14 100% 63.73%);
   --destructive-foreground: hsl(0 0% 100%);
-  --border: hsl(0 0% 14.9%);
-  --input: hsl(0 0% 14.9%);
+  --border: hsl(210 25.49% 20%);
+  --input: hsl(210 25.49% 20%);
   --ring: hsl(355.14 100% 63.73%);
   --chart-1: hsl(355.14 100% 63.73%);
-  --chart-2: hsl(354 100% 70.59%);
-  --chart-3: hsl(354.12 100% 80%);
-  --chart-4: hsl(353.11 100% 88.04%);
-  --chart-5: hsl(5.45 100% 95.69%);
-  --sidebar: hsl(0 0% 5.88%);
-  --sidebar-foreground: hsl(0 0% 89.8%);
+  --chart-2: hsl(141.89 69.16% 58.04%);
+  --chart-3: hsl(238.73 83.53% 66.67%);
+  --chart-4: hsl(47.95 95.82% 53.14%);
+  --chart-5: hsl(255.14 91.74% 76.27%);
+  --sidebar: hsl(210 40% 9.8%);
+  --sidebar-foreground: hsl(0 0% 100%);
   --sidebar-primary: hsl(355.14 100% 63.73%);
-  --sidebar-primary-foreground: hsl(38.18 22.45% 90.39%);
-  --sidebar-accent: hsl(354 100% 70.59%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(355.14 100% 63.73%);
   --sidebar-accent-foreground: hsl(0 0% 100%);
-  --sidebar-border: hsl(0 0% 14.9%);
+  --sidebar-border: hsl(210 25.49% 20%);
   --sidebar-ring: hsl(355.14 100% 63.73%);
-  --font-sans: Outfit, sans-serif;
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-  --radius: 0.2rem;
-  --shadow-2xs: 0px 0px 30px 0px hsl(0 0% 0% / 0.1);
-  --shadow-xs: 0px 0px 30px 0px hsl(0 0% 0% / 0.1);
+  --font-sans: Poppins, sans-serif;
+  --font-serif: serif;
+  --font-mono: monospace;
+  --radius: 0.3rem;
+  --shadow-2xs: 0px 0px 10px 0px hsl(0 0% 0% / 0.1);
+  --shadow-xs: 0px 0px 10px 0px hsl(0 0% 0% / 0.1);
   --shadow-sm:
-    0px 0px 30px 0px hsl(0 0% 0% / 0.2), 0px 1px 2px -1px hsl(0 0% 0% / 0.2);
+    0px 0px 10px 0px hsl(0 0% 0% / 0.2), 0px 1px 2px -1px hsl(0 0% 0% / 0.2);
   --shadow:
-    0px 0px 30px 0px hsl(0 0% 0% / 0.2), 0px 1px 2px -1px hsl(0 0% 0% / 0.2);
+    0px 0px 10px 0px hsl(0 0% 0% / 0.2), 0px 1px 2px -1px hsl(0 0% 0% / 0.2);
   --shadow-md:
-    0px 0px 30px 0px hsl(0 0% 0% / 0.2), 0px 2px 4px -1px hsl(0 0% 0% / 0.2);
+    0px 0px 10px 0px hsl(0 0% 0% / 0.2), 0px 2px 4px -1px hsl(0 0% 0% / 0.2);
   --shadow-lg:
-    0px 0px 30px 0px hsl(0 0% 0% / 0.2), 0px 4px 6px -1px hsl(0 0% 0% / 0.2);
+    0px 0px 10px 0px hsl(0 0% 0% / 0.2), 0px 4px 6px -1px hsl(0 0% 0% / 0.2);
   --shadow-xl:
-    0px 0px 30px 0px hsl(0 0% 0% / 0.2), 0px 8px 10px -1px hsl(0 0% 0% / 0.2);
-  --shadow-2xl: 0px 0px 30px 0px hsl(0 0% 0% / 0.5);
+    0px 0px 10px 0px hsl(0 0% 0% / 0.2), 0px 8px 10px -1px hsl(0 0% 0% / 0.2);
+  --shadow-2xl: 0px 0px 10px 0px hsl(0 0% 0% / 0.5);
 }
 
 @theme inline {
@@ -170,36 +278,4 @@
   --tracking-wide: calc(var(--tracking-normal) + 0.025em);
   --tracking-wider: calc(var(--tracking-normal) + 0.05em);
   --tracking-widest: calc(var(--tracking-normal) + 0.1em);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    letter-spacing: var(--tracking-normal);
-    @apply bg-background text-foreground;
-  }
-}
-
-@layer components {
-  .border-test {
-    @apply border border-muted-foreground dark:border-muted-foreground;
-  }
-
-  .normal-sentences {
-    @apply text-foreground dark:text-foreground text-sm md:text-base lg:text-lg;
-  }
-
-  .medium-sentences {
-    @apply text-foreground dark:text-foreground text-lg sm:text-xl md:text-3xl;
-  }
-
-  .large-sentences {
-    @apply text-foreground dark:text-foreground text-xl md:text-3xl lg:text-5xl;
-  }
-
-  .border-image {
-    @apply shadow-[13px_-13px] shadow-primary;
-  }
 }
